@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MRWOLF Run Manifest",
+  "type": "object",
+  "required": ["run_id", "timestamp", "repo", "branch", "commit_sha", "runner", "inputs"],
+  "properties": {
+    "run_id": {"type": "string"},
+    "timestamp": {"type": "string"},
+    "repo": {"type": "string"},
+    "branch": {"type": "string"},
+    "commit_sha": {"type": "string"},
+    "runner": {"type": "object"},
+    "inputs": {"type": "object"}
+  }
+}
