@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MRWOLF Ledger Event",
+  "type": "object",
+  "required": ["ts", "actor", "action", "artifact", "result"],
+  "properties": {
+    "ts": {"type": "string"},
+    "actor": {"type": "string"},
+    "action": {"type": "string"},
+    "artifact": {"type": "string"},
+    "result": {"type": "object"}
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "handoff_version": "1.0",
+  "decision": "PASS",
+  "run_id": "20260303T154845065Z-2478",
+  "repo": {
+    "branch": "work",
+    "commit_sha": "07d0a99b4f3a5b818c9df27e69bba6e21fd093e1"
+  },
+  "artifacts": [
+    {
+      "path": "audit_evidence/runs/20260303T154845065Z-2478/run_manifest.json"
+    },
+    {
+      "path": "audit_evidence/runs/20260303T154845065Z-2478/run_ledger.jsonl"
+    },
+    {
+      "path": "audit_evidence/runs/20260303T154845065Z-2478/SHA256SUMS.txt"
+    },
+    {
+      "path": "audit_evidence/runs/20260303T154845065Z-2478/gate.report.json"
+    },
+    {
+      "path": "audit_evidence/runs/20260303T154845065Z-2478/logs/"
+    },
+    {
+      "path": "audit_evidence/runs/20260303T154845065Z-2478/diff.patch OR changeset/"
+    }
+  ],
+  "reproduce_command": "python3 cli/mrwolf.py converge",
+  "gate_command": "bash scripts/one_click_MRWOLF_release_gate_v1.sh",
+  "blocking_issues": [],
+  "next_actions": []
+}

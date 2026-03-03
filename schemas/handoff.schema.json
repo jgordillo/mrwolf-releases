@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MRWOLF Handoff",
+  "type": "object",
+  "required": ["handoff_version", "decision", "run_id", "repo", "artifacts", "reproduce_command", "gate_command", "blocking_issues", "next_actions"],
+  "properties": {
+    "handoff_version": {"type": "string"},
+    "decision": {"type": "string", "enum": ["PASS", "FAIL"]},
+    "run_id": {"type": "string"},
+    "repo": {
+      "type": "object",
+      "required": ["branch", "commit_sha"],
+      "properties": {
+        "branch": {"type": "string"},
+        "commit_sha": {"type": "string"}
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path"],
+        "properties": {"path": {"type": "string"}}
+      }
+    },
+    "reproduce_command": {"type": "string"},
+    "gate_command": {"type": "string"},
+    "blocking_issues": {"type": "array"},
+    "next_actions": {"type": "array"}
+  }
+}

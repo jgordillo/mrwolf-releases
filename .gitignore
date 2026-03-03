@@ -1,0 +1,10 @@
+# Runtime-generated MRWOLF evidence
+/audit_evidence/runs/
+/audit_evidence/latest/
+
+# Build outputs
+/dist/
+
+# Python cache
+__pycache__/
+*.pyc

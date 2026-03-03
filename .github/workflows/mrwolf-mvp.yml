@@ -1,0 +1,60 @@
+name: mrwolf-mvp
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  mvp-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate schema files
+        run: python3 cli/mrwolf.py validate-schemas
+
+      - name: Run unattended handoff loop
+        run: python3 cli/mrwolf.py handoff-all
+
+      - name: Unit tests
+        run: python3 -m unittest -v tests.test_mrwolf
+
+      - name: Validate handoff PASS
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('audit_evidence/latest/mrwolf_handoff.json')
+          obj = json.loads(p.read_text())
+          assert obj['decision'] == 'PASS', obj
+          assert obj['blocking_issues'] == [], obj
+          print('handoff validation: PASS')
+          PY
+
+      - name: Build release bundle
+        run: bash scripts/build_release_bundle.sh ci
+
+      - name: Smoke install e2e
+        run: bash scripts/smoke_install_e2e.sh
+
+      - name: Upload runtime handoff
+        uses: actions/upload-artifact@v4
+        with:
+          name: handoff-runtime
+          path: audit_evidence/latest/mrwolf_handoff.json
+
+      - name: Upload runs
+        uses: actions/upload-artifact@v4
+        with:
+          name: runs
+          path: audit_evidence/runs/
+
+      - name: Upload dist bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
